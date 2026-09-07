@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabajo Final · consigna (Canvas · coevaluación)</title>
+</head>
+<body>
+<!-- ============================================================= -->
+<!-- INSTRUCCIONES: copia TODO lo que está dentro de <body> y       -->
+<!-- pégalo en el editor HTML de la Tarea (Assignment) en Canvas.   -->
+<!-- Activa "Peer Review" y adjunta la rúbrica de coevaluación.     -->
+<!-- Reemplaza los 2 marcadores de enlace (plantilla y rúbrica).    -->
+<!-- Solo estilos en línea: seguro para el editor de Canvas.        -->
+<!-- ============================================================= -->
+
+<div style="max-width:900px; margin:0 auto; font-family:Arial, sans-serif; color:#231F20; line-height:1.55;">
+
+  <!-- Banner -->
+  <div style="color:#ffffff; padding:30px 28px 32px; border-radius:14px; background:radial-gradient(circle at 88% 16%, rgba(255,14,73,0.20) 0, transparent 26%), radial-gradient(135% 150% at 82% 6%, #5c1328 0%, #3a0f1d 42%, #260f18 74%, #200f14 100%);">
+    <div style="display:inline-flex; align-items:center; gap:9px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:7px 15px; font-size:13px; letter-spacing:1px;">
+      <span style="width:9px; height:9px; border-radius:50%; background:#FF0E49; display:inline-block;"></span>
+      <b style="font-weight:900;">SISE</b><span style="opacity:0.6; font-weight:600; letter-spacing:2px;">&raquo; INSTITUTO SUPERIOR</span>
+    </div>
+    <h2 style="margin:18px 0 4px; font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif; font-weight:900; text-transform:uppercase; font-size:34px; line-height:1.0; letter-spacing:.5px; color:#ffffff;">La matriz de alineaci&oacute;n integral de tu curso</h2>
+    <div style="font-weight:600; font-size:16px; opacity:0.9;">Sesi&oacute;n 2 &middot; Trabajo Final</div>
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:16px;">
+      <div><span style="display:inline-block; background:#FF0E49; color:#ffffff; font-size:12px; font-weight:bold; padding:4px 12px; border-radius:999px; letter-spacing:0.5px;">CALIFICADO &middot; 60%</span><span style="display:inline-block; background:rgba(255,255,255,0.14); color:#ffffff; font-size:12px; font-weight:bold; padding:4px 12px; border-radius:999px; letter-spacing:0.5px; margin-left:6px;">TRABAJO INDIVIDUAL</span><span style="display:inline-block; background:rgba(255,255,255,0.14); color:#ffffff; font-size:12px; font-weight:bold; padding:4px 12px; border-radius:999px; letter-spacing:0.5px; margin-left:6px;">COEVALUACI&Oacute;N ENTRE PARES</span></div>
+      <div style="color:#FF0E49; font-weight:900; font-size:22px; letter-spacing:3px; opacity:.85;">&raquo;&raquo;&raquo;</div>
+    </div>
+  </div>
+
+  <!-- Cómo se evalúa -->
+  <div style="margin-top:16px; background:#eef6fb; border:1px solid #cfe0ea; border-radius:10px; padding:14px 16px; font-size:15.5px;">
+    <strong style="color:#0075B0;">C&oacute;mo se eval&uacute;a:</strong> construyes tu matriz de alineaci&oacute;n integral (Fase 1) y luego <strong>coeval&uacute;as la de un colega</strong> con la r&uacute;brica (Fase 2). <strong>El compa&ntilde;ero pone tu nota final</strong> del 60%; el tutor revisa los casos con discrepancia y puede habilitar una reentrega tras el feedback.
+  </div>
+
+  <!-- Logro -->
+  <div style="border:2px solid #0075B0; border-radius:12px; padding:16px 18px; margin-top:16px; background:#ffffff;">
+    <h3 style="margin:0 0 6px; color:#0075B0; font-size:19px;">&iquest;Qu&eacute; aprender&aacute;s al finalizar este trabajo?</h3>
+    <p style="margin:0; font-size:16px;">Al finalizar, construir&aacute;s la <strong>cadena de alineaci&oacute;n</strong> de tu curso &mdash; competencia &rarr; resultado &rarr; desempe&ntilde;o &rarr; evidencia &rarr; actividad &mdash; con verbos observables, lista para ordenar toda tu planificaci&oacute;n.</p>
+  </div>
+
+  <!-- Situación significativa -->
+  <h3 style="margin:22px 0 6px; color:#231F20; font-size:20px;">Situaci&oacute;n significativa</h3>
+  <div style="background:#f4f8fb; border-left:4px solid #0075B0; border-radius:8px; padding:14px 16px; font-size:16px;">
+    <p style="margin:0;">Est&aacute;s por planificar el ciclo completo de un <strong><u>curso a tu cargo en SISE</u></strong>. Como <strong><u>docente responsable de su dise&ntilde;o</u></strong>, necesitas una herramienta que ordene toda tu planificaci&oacute;n: <strong><u>una matriz que conecte, sin saltos, la competencia con lo que el estudiante debe poder hacer, c&oacute;mo lo demostrar&aacute; y qu&eacute; har&aacute; para lograrlo</u></strong>. Construirla es tu Trabajo Final; revisar la de un colega afina tu propio criterio.</p>
+    <p style="margin:10px 0 0; font-size:13.5px; color:#6c6c74;">Elementos: <strong>Contexto/Lugar</strong> = tu curso en SISE &middot; <strong>Rol</strong> = docente que dise&ntilde;a y coeval&uacute;a &middot; <strong>Desaf&iacute;o</strong> = construir una cadena coherente.</p>
+  </div>
+
+  <!-- Qué deberás hacer -->
+  <h3 style="margin:22px 0 6px; color:#231F20; font-size:20px;">&iquest;Qu&eacute; deber&aacute;s hacer?</h3>
+  <p style="margin:0; font-size:16px;">Deber&aacute;s <strong>(1)</strong> elaborar la <strong>matriz de alineaci&oacute;n integral</strong> de tu curso usando la plantilla, y <strong>(2)</strong> coevaluar la matriz de un colega con la r&uacute;brica. El trabajo es <strong>individual</strong>; la coevaluaci&oacute;n es entre pares.</p>
+
+  <!-- Descarga plantilla -->
+  <div style="margin-top:14px; border:2px dashed #0075B0; border-radius:10px; padding:16px; text-align:center; background:#ffffff;">
+    <!-- ====== MARCADOR 1: enlaza la Plantilla de matriz integral subida al curso ====== -->
+    <a href="#REEMPLAZAR-ENLACE-PLANTILLA" style="display:inline-block; background:#0075B0; color:#ffffff; text-decoration:none; font-weight:bold; padding:12px 22px; border-radius:8px; font-size:16px;">&#8681;&nbsp; Descargar la Plantilla de matriz de alineaci&oacute;n integral</a>
+    <div style="font-size:13px; color:#6c6c74; margin-top:8px;">Incluye instrucciones, chequeo de coherencia y un ejemplar resuelto.</div>
+  </div>
+
+  <!-- FASE 1 -->
+  <div style="margin-top:24px; display:flex; align-items:center; gap:10px;">
+    <span style="display:inline-block; background:#0075B0; color:#fff; font-size:12px; font-weight:bold; padding:4px 12px; border-radius:999px; letter-spacing:0.5px;">FASE 1</span>
+    <h3 style="margin:0; color:#231F20; font-size:20px;">Construye tu matriz</h3>
+  </div>
+  <div style="border:1px solid #cfe0ea; border-radius:10px; overflow:hidden; margin-top:10px;">
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #e6eef4;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#231F20; color:#fff; font-weight:bold; text-align:center; line-height:28px;">1</div><div style="flex:1; font-size:16px;">Parte de tu s&iacute;labo (la lectura de la Sesi&oacute;n 1) y de tus reescrituras de verbos (Sesi&oacute;n 2).</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #e6eef4;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#0075B0; color:#fff; font-weight:bold; text-align:center; line-height:28px;">2</div><div style="flex:1; font-size:16px;">Completa el <strong>encabezado</strong>: competencia general y resultado general con verbo observable.</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #e6eef4;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#0075B0; color:#fff; font-weight:bold; text-align:center; line-height:28px;">3</div><div style="flex:1; font-size:16px;">Para cada unidad, construye la <strong>cadena</strong>: competencia &rarr; resultado (verbo observable) &rarr; desempe&ntilde;o &rarr; evidencia &rarr; actividad aut&eacute;ntica.</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #e6eef4;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#0075B0; color:#fff; font-weight:bold; text-align:center; line-height:28px;">4</div><div style="flex:1; font-size:16px;">Verifica la <strong>coherencia</strong>: que cada eslab&oacute;n conecte con el anterior, sin saltos.</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #e6eef4;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#0075B0; color:#fff; font-weight:bold; text-align:center; line-height:28px;">5</div><div style="flex:1; font-size:16px;">Recuerda: <strong>un verbo observable por resultado</strong> (gu&iacute;a Bloom&ndash;Marzano). Esto <strong>no</strong> es un dise&ntilde;o de sesi&oacute;n (momentos, tiempos, herramientas).</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#0075B0; color:#fff; font-weight:bold; text-align:center; line-height:28px;">6</div><div style="flex:1; font-size:16px;"><strong>Autochequea con la r&uacute;brica</strong> y entrega tu matriz.</div></div>
+  </div>
+
+  <!-- FASE 2 -->
+  <div style="margin-top:24px; display:flex; align-items:center; gap:10px;">
+    <span style="display:inline-block; background:#C77700; color:#fff; font-size:12px; font-weight:bold; padding:4px 12px; border-radius:999px; letter-spacing:0.5px;">FASE 2</span>
+    <h3 style="margin:0; color:#231F20; font-size:20px;">Coeval&uacute;a a un colega</h3>
+  </div>
+  <div style="border:1px solid #f0dcae; border-radius:10px; overflow:hidden; background:#fffdf8; margin-top:10px;">
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #f2e6c9;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#C77700; color:#fff; font-weight:bold; text-align:center; line-height:28px;">a</div><div style="flex:1; font-size:16px;">El aula te asignar&aacute; autom&aacute;ticamente la matriz de un colega.</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #f2e6c9;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#C77700; color:#fff; font-weight:bold; text-align:center; line-height:28px;">b</div><div style="flex:1; font-size:16px;">Eval&uacute;a con la <strong>R&uacute;brica de coevaluaci&oacute;n del Trabajo Final</strong>, criterio por criterio (total sobre 20).</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #f2e6c9;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#C77700; color:#fff; font-weight:bold; text-align:center; line-height:28px;">c</div><div style="flex:1; font-size:16px;">Justifica cada puntaje con <strong>evidencia</strong> tomada de la matriz de tu colega (no con impresiones).</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px; border-bottom:1px solid #f2e6c9;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#C77700; color:#fff; font-weight:bold; text-align:center; line-height:28px;">d</div><div style="flex:1; font-size:16px;">Deja un comentario final constructivo: <strong>un acierto</strong> y <strong>una mejora concreta</strong>.</div></div>
+    <div style="display:flex; gap:12px; padding:13px 16px;"><div style="flex:0 0 auto; width:28px; height:28px; border-radius:8px; background:#C77700; color:#fff; font-weight:bold; text-align:center; line-height:28px;">e</div><div style="flex:1; font-size:16px;">Tu evaluaci&oacute;n <strong>determina la nota final</strong> de tu colega. Eval&uacute;a la coherencia de su matriz, no si su curso es &ldquo;bueno&rdquo; o &ldquo;malo&rdquo;.</div></div>
+  </div>
+
+  <!-- Entrega -->
+  <h3 style="margin:24px 0 6px; color:#231F20; font-size:20px;">&iquest;C&oacute;mo y cu&aacute;ndo presentar&aacute;s tu trabajo?</h3>
+  <ul style="margin:0; padding-left:20px; font-size:16px; line-height:1.7;">
+    <li><strong>Fase 1 (entrega):</strong> sube tu matriz en <strong>PDF</strong>, nombrada <strong>APELLIDOS_NOMBRES_TF</strong>, en la fecha indicada en el aula.</li>
+    <li><strong>Fase 2 (coevaluaci&oacute;n):</strong> completa la coevaluaci&oacute;n asignada, con la r&uacute;brica y tus comentarios, dentro del plazo de revisi&oacute;n.</li>
+    <li>Ambas fases son obligatorias: no completar la coevaluaci&oacute;n afecta tu calificaci&oacute;n del Trabajo Final.</li>
+  </ul>
+
+  <!-- Pautas -->
+  <h3 style="margin:22px 0 6px; color:#231F20; font-size:20px;">Pautas y sugerencias</h3>
+  <ul style="margin:0; padding-left:20px; font-size:16px; line-height:1.7;">
+    <li>Ten a la mano la <strong>Gu&iacute;a de verbos Bloom&ndash;Marzano</strong> y el <strong>ejemplar resuelto</strong> de la plantilla.</li>
+    <li>Se eval&uacute;a la <strong>coherencia de la cadena</strong>, no si tu curso es &ldquo;bueno&rdquo;.</li>
+    <li>Recuerda el l&iacute;mite: la matriz <strong>no es un dise&ntilde;o de sesi&oacute;n</strong> (momentos, tiempos, herramientas).</li>
+    <li>Ante cualquier duda, contacta a tu tutor del programa.</li>
+  </ul>
+
+  <!-- Integridad / IA -->
+  <div style="margin-top:18px; background:#fff5f6; border-left:4px solid #FF0E49; border-radius:8px; padding:14px 16px; font-size:15px;">
+    <p style="margin:0 0 8px;"><strong>Integridad acad&eacute;mica.</strong> &ldquo;Si se detecta plagio o uso indebido de IA en una evaluaci&oacute;n, el estudiante recibir&aacute; una calificaci&oacute;n de 00 en la actividad. En casos reiterativos, se aplicar&aacute;n sanciones progresivas conforme a la normativa institucional.&rdquo;</p>
+    <p style="margin:0;"><strong>Declaraci&oacute;n de uso de IA.</strong> Si usaste una herramienta de IA como apoyo, decl&aacute;ralo al final de tu entrega indicando para qu&eacute; la usaste.</p>
+  </div>
+
+  <!-- Criterios -->
+  <h3 style="margin:22px 0 6px; color:#231F20; font-size:20px;">Criterios de evaluaci&oacute;n (r&uacute;brica de coevaluaci&oacute;n)</h3>
+  <p style="margin:0 0 10px; font-size:16px;">Con esta r&uacute;brica preparas tu entrega y tu colega pone tu nota final (20 puntos; nota m&iacute;nima aprobatoria del programa: 17):</p>
+  <div style="display:flex; flex-wrap:wrap; gap:10px;">
+    <div style="flex:1; min-width:220px; border:1px solid #cfe0ea; border-radius:8px; padding:12px;"><strong style="color:#0075B0;">1. Cadena de alineaci&oacute;n</strong><div style="font-size:14px; color:#6c6c74;">8 pts</div></div>
+    <div style="flex:1; min-width:220px; border:1px solid #cfe0ea; border-radius:8px; padding:12px;"><strong style="color:#0075B0;">2. Verbos observables</strong><div style="font-size:14px; color:#6c6c74;">4 pts</div></div>
+    <div style="flex:1; min-width:220px; border:1px solid #cfe0ea; border-radius:8px; padding:12px;"><strong style="color:#0075B0;">3. Evidencia aut&eacute;ntica</strong><div style="font-size:14px; color:#6c6c74;">4 pts</div></div>
+    <div style="flex:1; min-width:220px; border:1px solid #cfe0ea; border-radius:8px; padding:12px;"><strong style="color:#0075B0;">4. Actividad coherente</strong><div style="font-size:14px; color:#6c6c74;">4 pts</div></div>
+  </div>
+  <div style="margin-top:12px; text-align:center;">
+    <!-- ====== MARCADOR 2: enlaza la Rúbrica de coevaluación subida al curso ====== -->
+    <a href="#REEMPLAZAR-ENLACE-RUBRICA" style="display:inline-block; background:#ffffff; color:#0075B0; text-decoration:none; font-weight:bold; padding:11px 20px; border-radius:8px; font-size:15px; border:2px solid #0075B0;">&#8681;&nbsp; Descargar la R&uacute;brica de coevaluaci&oacute;n</a>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:22px; text-align:center; color:#6c6c74; font-size:13px; border-top:1px solid #e6e6e6; padding-top:12px;">
+    SISE &raquo; Instituto Superior &middot; Programa de Capacitaci&oacute;n Docente &middot; <strong style="color:#FF0E49;">#HAZLABIEN</strong>
+  </div>
+
+</div>
+</body>
+</html>

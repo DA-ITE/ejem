@@ -3,302 +3,1788 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S2-01 · Autodiagnóstico: ¿desde dónde planificas?</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+<title>Sílabo | Diseño inverso y planificación didáctica inteligente en entornos virtuales</title>
+
 <style>
-  :root{ --red:#FF0E49; --black:#231F20; --ink:#2b2b2e; --paper:#fff; --bg:#f4f4f6; --line:#e2e2e6; --muted:#6c6c74; --amber:#C77700; --green:#1E8E5A; --blue:#0075B0; --soft:#faf7f8; }
-  *{box-sizing:border-box}
-  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Barlow Condensed',Arial,sans-serif; font-size:18px; line-height:1.5; -webkit-font-smoothing:antialiased}
-  .wrap{max-width:800px; margin:0 auto; padding:24px 16px 60px}
-  .card{background:var(--paper); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 8px 30px rgba(35,31,32,.06)}
-  .head{position:relative; overflow:hidden; color:#fff; padding:30px 30px 46px; background:radial-gradient(135% 150% at 82% 6%, #5c1328 0%, #3a0f1d 42%, #260f18 74%, #200f14 100%)}
-  .head .ring{position:absolute; border-radius:50%; pointer-events:none}
-  .head .r1{top:-130px; right:-80px; width:340px; height:340px; border:1px solid rgba(255,255,255,.08)}
-  .head .r2{top:-46px; right:34px; width:180px; height:180px; border:1px solid rgba(255,14,73,.18)}
-  .pill{position:relative; z-index:2; display:inline-flex; align-items:center; gap:9px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); border-radius:999px; padding:7px 15px; font-size:13px; letter-spacing:1px}
-  .pill .dot{width:9px; height:9px; border-radius:50%; background:var(--red); box-shadow:0 0 10px rgba(255,14,73,.8)}
-  .pill b{font-weight:900; color:#fff}
-  .pill span{opacity:.6; font-weight:600; letter-spacing:2px}
-  .htitle{position:relative; z-index:2; margin:20px 0 4px; font-weight:900; text-transform:uppercase; font-size:34px; line-height:.98; letter-spacing:.5px}
-  .hsub{position:relative; z-index:2; font-weight:600; font-size:17px; opacity:.9}
-  .chev{position:absolute; right:28px; bottom:16px; z-index:2; color:var(--red); font-weight:900; font-size:24px; letter-spacing:3px; opacity:.85}
-  .meta{display:flex; flex-wrap:wrap; background:#fff; border-bottom:1px solid var(--line)}
-  .meta .m{flex:1; min-width:150px; padding:15px 20px; border-right:1px solid var(--line)}
-  .meta .m:last-child{border-right:none}
-  .meta .m .l{font-size:11px; font-weight:700; letter-spacing:1px; color:var(--red); text-transform:uppercase}
-  .meta .m .v{font-size:15px; font-weight:600; color:var(--black); margin-top:3px}
-  .body{padding:22px 26px 8px}
-  .intro{background:#fbfbfc; border:1px solid var(--line); border-left:4px solid var(--black); border-radius:8px; padding:14px 16px; font-size:18px; margin-bottom:16px}
+:root{
+  --pink:#FF0050;
+  --pink-dark:#D90043;
+  --dark:#171416;
+  --dark-2:#231F20;
+  --wine:#4A1026;
+  --ink:#2E292B;
+  --muted:#746C70;
+  --line:#E4DDE0;
+  --soft:#FFF2F6;
+  --soft-2:#FAF8F9;
+  --paper:#FFFFFF;
+}
 
-  .stmt{border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:12px}
-  .stmt .q{font-weight:600; font-size:17px; color:var(--black); margin:0 0 10px}
-  .opts{display:flex; gap:8px; flex-wrap:wrap}
-  .opt{flex:1; min-width:110px; font-family:inherit; font-size:15.5px; font-weight:600; color:var(--ink); background:#fff; border:1.5px solid var(--line); border-radius:8px; padding:9px 10px; cursor:pointer; text-align:center; transition:.12s}
-  .opt:hover{border-color:var(--red)}
-  .opt.sel{background:var(--black); border-color:var(--black); color:#fff}
+*{box-sizing:border-box}
 
-  .bar{position:sticky; bottom:0; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 26px; background:#fff; border-top:1px solid var(--line)}
-  .progress{font-weight:600; font-size:15px; color:var(--muted)}
-  .btn{font-family:inherit; font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:.5px; background:var(--red); color:#fff; border:none; border-radius:10px; padding:12px 22px; cursor:pointer}
-  .btn:disabled{opacity:.4; cursor:not-allowed}
-  .btn.ghost{background:#fff; color:var(--black); border:1.5px solid var(--line)}
-  .btn.dl{background:#fff; color:var(--black); border:1.5px solid var(--black); display:inline-flex; align-items:center; gap:8px; text-transform:none; letter-spacing:0}
-  .btn.dl:hover{background:var(--black); color:#fff}
-  .btn.dl svg{display:block}
-  .barbtns{display:flex; gap:10px; align-items:center}
+html{scroll-behavior:smooth}
 
-  .result{display:none}
-  .result.show{display:block; animation:rise .3s ease}
-  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .rband{border-radius:12px; padding:20px; color:#fff}
-  .rband .lab{font-size:13px; letter-spacing:2px; font-weight:700; opacity:.9}
-  .rband h3{margin:6px 0 0; font-size:26px; font-weight:900; text-transform:uppercase}
-  .scale{display:flex; gap:6px; margin:14px 0 4px}
-  .scale .seg{flex:1; height:8px; border-radius:99px; background:#ececed}
-  .rtext{font-size:17px; margin:16px 0 8px}
-  .work{background:#fbfbfc; border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-top:10px}
-  .work h4{margin:0 0 8px; font-size:16px; color:var(--black)}
-  .work .li{display:flex; gap:10px; align-items:flex-start; font-size:16px; margin-bottom:7px}
-  .bridge{background:var(--black); color:#fff; border-radius:10px; padding:15px 17px; margin-top:14px; font-size:16.5px}
+body{
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 7% 4%,rgba(255,0,80,.08),transparent 22%),
+    linear-gradient(180deg,#F1EEF0 0%,#F8F6F7 45%,#ECE8EA 100%);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.55;
+}
 
-  .foot{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; padding:14px 26px; border-top:1px solid var(--line); background:var(--soft); color:var(--muted); font-size:14px}
-  .foot .hz{font-weight:900; color:var(--red)}
-  .ai-note{padding:0 26px 20px; color:var(--muted); font-size:13.5px}
+button{font:inherit}
+
+.syllabus{
+  width:min(1180px,calc(100% - 28px));
+  margin:28px auto 42px;
+  overflow:hidden;
+  border:1px solid #DED7DA;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 24px 60px rgba(35,31,32,.14);
+}
+
+/* =========================================================
+   PORTADA
+========================================================= */
+
+.hero{
+  position:relative;
+  min-height:620px;
+  overflow:hidden;
+  color:#fff;
+  background:
+    radial-gradient(circle at 12% 88%,rgba(255,0,80,.18),transparent 31%),
+    linear-gradient(
+      112deg,
+      #171416 0%,
+      #241C1F 70%,
+      #F30048 70%,
+      #FF0050 100%
+    );
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:380px;
+  height:380px;
+  right:-150px;
+  top:-130px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:50%;
+}
+
+.hero::after{
+  content:"»";
+  position:absolute;
+  right:64px;
+  bottom:46px;
+  color:#fff;
+  font-size:112px;
+  font-weight:900;
+  line-height:1;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+  min-height:620px;
+  padding:56px 68px 54px;
+}
+
+.brand{
+  color:#fff;
+  font-size:44px;
+  font-weight:900;
+  letter-spacing:-2px;
+}
+
+.brand span{color:var(--pink)}
+
+.brand small{
+  display:block;
+  margin-top:-7px;
+  color:#CFC5C9;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.program-badge{
+  display:inline-flex;
+  margin-top:18px;
+  padding:7px 14px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:999px;
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.hero-main{
+  max-width:760px;
+  margin-top:105px;
+}
+
+.kicker{
+  margin-bottom:17px;
+  color:#FF5C8B;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(38px,5vw,62px);
+  line-height:1.03;
+  font-weight:400;
+  letter-spacing:-1.8px;
+  text-transform:uppercase;
+}
+
+.hero h1 strong{
+  font-weight:900;
+}
+
+.hero-copy{
+  max-width:690px;
+  margin-top:19px;
+  color:#E7DFE2;
+  font-size:17px;
+  line-height:1.62;
+}
+
+.hero-rule{
+  width:64%;
+  height:2px;
+  margin-top:48px;
+  background:linear-gradient(90deg,var(--pink),transparent);
+}
+
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+  max-width:720px;
+  margin-top:18px;
+}
+
+.stat strong{
+  display:block;
+  color:#fff;
+  font-size:20px;
+  font-weight:500;
+}
+
+.stat span{
+  display:block;
+  margin-top:5px;
+  color:#AAA0A4;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
+}
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+.content{
+  padding:48px 62px 58px;
+}
+
+.section{
+  margin:0 0 42px;
+  scroll-margin-top:18px;
+}
+
+.section:last-child{margin-bottom:0}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  margin:0 0 18px;
+  color:var(--dark-2);
+  font-size:23px;
+  line-height:1.2;
+  text-transform:uppercase;
+}
+
+.section-no{
+  display:inline-flex;
+  flex:0 0 38px;
+  align-items:center;
+  justify-content:center;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  color:#fff;
+  background:var(--pink);
+  font-size:13px;
+  font-weight:900;
+  box-shadow:0 0 0 7px rgba(255,0,80,.08);
+}
+
+/* DATOS */
+
+.data-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:13px;
+}
+
+.data-card{
+  min-height:102px;
+  padding:18px 16px;
+  border:1px solid #E6DEE1;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 7px 18px rgba(35,31,32,.04);
+}
+
+.data-card span{
+  display:block;
+  color:var(--pink);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.75px;
+  text-transform:uppercase;
+}
+
+.data-card strong{
+  display:block;
+  margin-top:9px;
+  color:var(--dark-2);
+  font-size:17px;
+}
+
+/* SUMILLA */
+
+.lead-box{
+  padding:21px 23px;
+  border-left:6px solid var(--pink);
+  border-radius:0 14px 14px 0;
+  background:linear-gradient(90deg,#FFF0F5,#FFF9FB);
+}
+
+.lead-box p{
+  margin:0;
+  color:#4C4548;
+  font-size:15px;
+  line-height:1.72;
+  text-align:justify;
+}
+
+/* LOGRO */
+
+.highlight{
+  padding:25px;
+  border-radius:14px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 95% 10%,rgba(255,0,80,.25),transparent 34%),
+    linear-gradient(135deg,#1C181A,#481126);
+}
+
+.highlight strong{
+  display:block;
+  margin-bottom:8px;
+  color:#fff;
+  font-size:19px;
+}
+
+.highlight p{
+  margin:0;
+  color:#EEE6E9;
+  font-size:15px;
+  line-height:1.68;
+}
+
+.outcome-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px;
+  margin-top:15px;
+}
+
+.outcome{
+  padding:18px 19px;
+  border:1px solid #E7DEE1;
+  border-radius:12px;
+  background:#fff;
+}
+
+.outcome strong{
+  display:block;
+  color:var(--pink);
+  font-size:15px;
+}
+
+.outcome p{
+  margin:7px 0 0;
+  color:#514A4C;
+  font-size:13.5px;
+  line-height:1.6;
+}
+
+/* COMPETENCIA */
+
+.competency-card{
+  padding:22px 23px;
+  border:1px solid #E8DFE2;
+  border-radius:13px;
+  background:#FAF8F9;
+}
+
+.competency-card strong{
+  display:block;
+  color:var(--dark-2);
+  font-size:18px;
+}
+
+.competency-card span{
+  display:block;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* MÓDULOS */
+
+.module-card{
+  margin:0 0 22px;
+  overflow:hidden;
+  border:1px solid #D2C8CC;
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 8px 20px rgba(35,31,32,.04);
+}
+
+.module-card:last-child{margin-bottom:0}
+
+.module-head{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  border-bottom:1px solid #D2C8CC;
+}
+
+.module-label{
+  padding:19px 20px;
+  color:#fff;
+  background:linear-gradient(135deg,#E70045,#FF0050);
+  font-size:13px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.module-value{
+  padding:19px 20px;
+  color:var(--dark-2);
+  font-size:18px;
+  font-weight:800;
+}
+
+.module-row{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  border-top:1px solid #DDD5D8;
+}
+
+.module-row:first-of-type{border-top:0}
+
+.module-row .left{
+  padding:17px 20px;
+  color:#fff;
+  background:#FF0A4E;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.module-row .right{
+  padding:17px 20px;
+  color:#453E41;
+  font-size:14px;
+  line-height:1.62;
+}
+
+ul.clean{
+  margin:0;
+  padding-left:20px;
+}
+
+ul.clean li{margin:5px 0}
+ul.clean li::marker{color:var(--pink)}
+
+/* ESTRATEGIAS */
+
+.method-intro{
+  margin-bottom:15px;
+  padding:18px 20px;
+  border-left:5px solid var(--pink);
+  border-radius:0 10px 10px 0;
+  background:var(--soft);
+  color:#4B4346;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.strategy-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.strategy{
+  padding:19px 20px;
+  border:1px solid #E7DEE1;
+  border-radius:12px;
+  background:#fff;
+}
+
+.strategy .number{
+  display:inline-flex;
+  width:31px;
+  height:31px;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:9px;
+  border-radius:50%;
+  color:#fff;
+  background:var(--pink);
+  font-size:11px;
+  font-weight:900;
+}
+
+.strategy strong{
+  display:block;
+  color:var(--pink);
+  font-size:15px;
+  text-transform:uppercase;
+}
+
+.strategy p{
+  margin:7px 0 0;
+  color:#514A4C;
+  font-size:13.5px;
+  line-height:1.6;
+}
+
+.practice-note{
+  margin-top:14px;
+  padding:18px 20px;
+  border-radius:11px;
+  color:#fff;
+  background:var(--dark-2);
+  font-size:14px;
+  font-weight:700;
+  line-height:1.6;
+}
+
+/* TABLAS */
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+.eval-table,
+.route-table{
+  font-size:13px;
+}
+
+.eval-table th,
+.route-table th{
+  padding:11px 9px;
+  border:1px solid #999194;
+  color:#fff;
+  background:linear-gradient(135deg,#E00044,#FF0050);
+  font-size:11px;
+  text-transform:uppercase;
+}
+
+.eval-table td,
+.route-table td{
+  padding:12px 11px;
+  border:1px solid #AEA6A9;
+  vertical-align:top;
+  color:#3F393B;
+  line-height:1.45;
+}
+
+.eval-table .rubric{
+  width:22%;
+  color:#fff;
+  background:#F20A4B;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.eval-table .code{
+  width:9%;
+  font-weight:900;
+  text-align:center;
+}
+
+.eval-table .weight{
+  width:10%;
+  color:var(--dark-2);
+  font-size:17px;
+  font-weight:900;
+  text-align:center;
+}
+
+.formula-row td{
+  padding:14px;
+  color:#fff;
+  background:#E90044;
+  font-size:15px;
+  font-weight:900;
+  text-align:center;
+}
+
+.tiny-note{
+  margin-top:10px;
+  color:#746C70;
+  font-size:11.5px;
+  line-height:1.55;
+}
+
+/* ACTIVIDADES */
+
+.route-table .module-col{
+  width:10%;
+  color:#fff;
+  background:#F20A4B;
+  font-size:22px;
+  font-weight:900;
+  text-align:center;
+  vertical-align:middle;
+}
+
+.route-table .topic-col{
+  width:32%;
+}
+
+.route-table h4{
+  margin:0;
+  color:#242022;
+  font-size:14px;
+  line-height:1.45;
+}
+
+.route-table ul{
+  margin:0;
+  padding-left:18px;
+}
+
+.route-table li{margin:4px 0}
+.route-table li::marker{color:var(--pink)}
+
+.work-box{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  overflow:hidden;
+  margin-top:18px;
+  border:1px solid #AAA2A5;
+  border-radius:11px;
+}
+
+.work-box .label{
+  padding:20px;
+  color:#fff;
+  background:#E90044;
+  font-size:16px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.work-box .work-content{
+  padding:20px;
+  color:#403A3C;
+  font-size:14px;
+  line-height:1.62;
+}
+
+/* RECURSOS */
+
+.resource-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px;
+}
+
+.resource-card{
+  padding:18px 19px;
+  border:1px solid #E6DDE0;
+  border-radius:12px;
+  background:#fff;
+}
+
+.resource-card strong{
+  display:block;
+  color:var(--pink);
+  font-size:14px;
+}
+
+.resource-card p{
+  margin:7px 0 0;
+  color:#514A4C;
+  font-size:13.5px;
+  line-height:1.58;
+}
+
+/* REFERENCIAS */
+
+.references{
+  margin:0;
+  padding-left:20px;
+  columns:2;
+  column-gap:35px;
+}
+
+.references li{
+  break-inside:avoid;
+  margin:0 0 12px;
+  color:#514A4C;
+  font-size:13.5px;
+  line-height:1.58;
+}
+
+.references li::marker{color:var(--pink)}
+
+/* CERTIFICACIÓN */
+
+.cert-box{
+  padding:25px;
+  border-radius:14px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 94% 10%,rgba(255,0,80,.28),transparent 34%),
+    linear-gradient(135deg,#1D191B,#4B1027);
+}
+
+.cert-box strong{
+  display:block;
+  color:#fff;
+  font-size:18px;
+}
+
+.cert-box ul{
+  margin:12px 0 0;
+  padding-left:20px;
+  color:#E7DEE1;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.cert-box li::marker{color:#FF5B8A}
+
+.cert-box em{
+  display:block;
+  margin-top:13px;
+  color:#FFB2CA;
+  font-size:13px;
+}
+
+/* FOOTER */
+
+.footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:22px 62px;
+  border-top:1px solid #E5DDE0;
+  color:#8A8185;
+  background:#FAF8F9;
+  font-size:10px;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+}
+
+.footer strong{color:var(--pink)}
+
+/* =========================================================
+   BOTÓN PDF
+========================================================= */
+
+.pdf-download-float{
+  position:fixed;
+  right:22px;
+  top:22px;
+  z-index:9999;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  min-height:52px;
+  padding:13px 19px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  color:#fff;
+  background:linear-gradient(135deg,#231F20 0%,#4A1026 58%,#FF0050 100%);
+  box-shadow:0 14px 30px rgba(35,31,32,.26);
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.pdf-download-float:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 36px rgba(35,31,32,.32);
+}
+
+.pdf-download-float:disabled{
+  opacity:.7;
+  cursor:wait;
+  transform:none;
+}
+
+.pdf-download-float svg{
+  width:20px;
+  height:20px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:820px){
+
+  .syllabus{
+    width:min(calc(100% - 14px),1180px);
+    margin:10px auto 24px;
+    border-radius:13px;
+  }
+
+  .hero-inner{
+    padding:42px 30px 44px;
+  }
+
+  .hero-main{
+    max-width:76%;
+    margin-top:90px;
+  }
+
+  .hero::after{
+    right:25px;
+    bottom:35px;
+    font-size:88px;
+  }
+
+  .content{
+    padding:38px 28px 44px;
+  }
+
+  .data-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .module-head,
+  .module-row{
+    grid-template-columns:175px 1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  .hero{
+    min-height:690px;
+    background:
+      linear-gradient(
+        112deg,
+        #171416 0%,
+        #241C1F 79%,
+        #FF0050 79%,
+        #FF0050 100%
+      );
+  }
+
+  .hero-inner{
+    min-height:690px;
+    padding:32px 18px 38px;
+  }
+
+  .brand{font-size:34px}
+
+  .hero-main{
+    margin-top:70px;
+    max-width:84%;
+  }
+
+  .hero h1{font-size:32px}
+
+  .hero-copy{font-size:14px}
+
+  .hero-stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    max-width:84%;
+  }
+
+  .hero::after{
+    right:14px;
+    bottom:20px;
+    font-size:70px;
+  }
+
+  .content{
+    padding:30px 16px 36px;
+  }
+
+  .section-title{font-size:19px}
+
+  .data-grid,
+  .outcome-grid,
+  .strategy-grid,
+  .resource-list{
+    grid-template-columns:1fr;
+  }
+
+  .module-head,
+  .module-row{
+    grid-template-columns:1fr;
+  }
+
+  .module-label,
+  .module-row .left{
+    padding:11px 14px;
+  }
+
+  .module-value,
+  .module-row .right{
+    padding:14px;
+  }
+
+  .work-box{
+    grid-template-columns:1fr;
+  }
+
+  .references{
+    columns:1;
+  }
+
+  .footer{
+    padding:18px 16px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .pdf-download-float{
+    right:12px;
+    top:12px;
+    min-height:47px;
+    padding:11px 14px;
+    font-size:12px;
+  }
+}
+
+/* =========================================================
+   IMPRESIÓN / PDF
+========================================================= */
+
+@media print{
+
+  @page{
+    size:A4;
+    margin:10mm;
+  }
+
+  body{background:#fff}
+
+  .pdf-download-float{
+    display:none !important;
+  }
+
+  .syllabus{
+    width:100%;
+    margin:0;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+
+  .hero{
+    min-height:267mm;
+    break-after:page;
+    page-break-after:always;
+  }
+
+  .hero-inner{
+    min-height:267mm;
+  }
+
+  .section,
+  .module-card,
+  .strategy,
+  .outcome,
+  .resource-card,
+  .work-box,
+  .cert-box{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+
+  .footer{
+    display:none;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="wrap">
-  <div class="card">
-    <div class="head">
-      <div class="ring r1"></div><div class="ring r2"></div>
-      <div class="pill"><span class="dot"></span><b>SISE</b><span>» INSTITUTO SUPERIOR</span></div>
-      <div class="htitle">¿Desde dónde planificas hoy?</div>
-      <div class="hsub">Sesión 2 · Reflexionar · Autodiagnóstico de partida</div>
-      <div class="chev">&raquo;&raquo;&raquo;</div>
-    </div>
-    <div class="meta">
-      <div class="m"><div class="l">Momento</div><div class="v">Reflexionar</div></div>
-      <div class="m"><div class="l">Duración</div><div class="v">~8 min</div></div>
-      <div class="m"><div class="l">Tipo</div><div class="v">Autodiagnóstico (sin nota)</div></div>
-    </div>
 
-    <div class="body" id="stage">
-      <div class="intro">Antes de entrar al tema de hoy —<strong>del contenido al desempeño observable</strong>— hazte un autodiagnóstico honesto: ¿cómo redactas y lees tus resultados y desempeños hoy? <strong>No hay respuestas correctas.</strong> Al final te muestro tu perfil de partida y qué trabajarás en esta sesión.</div>
-      <div id="items"></div>
-      <div class="result" id="result"></div>
-    </div>
+<main class="syllabus" id="syllabus">
 
-    <div class="bar">
-      <span class="progress" id="progress">0 / 8 respondidas</span>
-      <button class="btn" id="see" disabled>Ver mi perfil</button>
-    </div>
+  <!-- =====================================================
+       PORTADA
+  ====================================================== -->
 
-    <div class="foot">
-      <span>SISE&raquo; Instituto Superior · Programa de Capacitación Docente</span>
-      <span class="hz">#HAZLABIEN</span>
+  <section class="hero">
+    <div class="hero-inner">
+
+      <div class="brand">
+        SISE<span>»</span>
+        <small>Instituto Superior</small>
+      </div>
+
+      <div class="program-badge">
+        PAC 2026 · Programa de Capacitación Docente
+      </div>
+
+      <div class="hero-main">
+
+        <div class="kicker">
+          Programa de capacitación docente
+        </div>
+
+        <h1>
+          <strong>Diseño inverso y planificación</strong><br>
+          didáctica inteligente en entornos virtuales
+        </h1>
+
+        <p class="hero-copy">
+          Convierte tu sílabo en una herramienta de planificación:
+          aprende a leerlo con lente pedagógico y a traducir competencias
+          y resultados de aprendizaje en desempeños observables y evidencias
+          alineadas.
+        </p>
+
+        <div class="hero-rule"></div>
+
+        <div class="hero-stats">
+
+          <div class="stat">
+            <strong>3 H</strong>
+            <span>Horas</span>
+          </div>
+
+          <div class="stat">
+            <strong>2 meses</strong>
+            <span>Vigencia</span>
+          </div>
+
+          <div class="stat">
+            <strong>2</strong>
+            <span>Módulos</span>
+          </div>
+
+          <div class="stat">
+            <strong>Online</strong>
+            <span>Canvas · Asíncrono</span>
+          </div>
+
+        </div>
+      </div>
+
     </div>
-    <div class="ai-note">Autodiagnóstico formativo. No se registra ni califica. Guion base apoyado con IA.</div>
+  </section>
+
+
+  <div class="content">
+
+    <!-- 1 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">1</span>
+        Datos generales
+      </h2>
+
+      <div class="data-grid">
+
+        <div class="data-card">
+          <span>Público</span>
+          <strong>Docentes SISE</strong>
+        </div>
+
+        <div class="data-card">
+          <span>Vigencia del curso</span>
+          <strong>2 meses</strong>
+        </div>
+
+        <div class="data-card">
+          <span>Horas</span>
+          <strong>3 horas</strong>
+        </div>
+
+        <div class="data-card">
+          <span>Modalidad</span>
+          <strong>Online asíncrona</strong>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 2 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">2</span>
+        Sumilla
+      </h2>
+
+      <div class="lead-box">
+        <p>
+          El curso <strong>Diseño inverso y planificación didáctica inteligente
+          en entornos virtuales</strong> orienta al docente a convertir su sílabo
+          en una herramienta de planificación, leerlo con lente pedagógico y
+          traducir competencias y resultados de aprendizaje en desempeños
+          observables y evidencias alineadas. La experiencia se desarrolla
+          mediante Action Mapping, aprendizaje basado en escenarios y
+          microlearning, trabajando sobre el propio sílabo del participante y
+          priorizando acciones de planificación centradas en el desempeño.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- 3 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">3</span>
+        Logro destacado del curso
+      </h2>
+
+      <div class="highlight">
+        <strong>¿Qué lograrás?</strong>
+
+        <p>
+          Diseñarás la alineación pedagógica de un curso propio, traduciendo
+          competencias y resultados de aprendizaje en desempeños observables y
+          evidencias coherentes bajo la lógica del diseño inverso, para planificar
+          experiencias centradas en el desempeño en entornos virtuales.
+        </p>
+      </div>
+
+      <div class="outcome-grid">
+
+        <article class="outcome">
+          <strong>Leer el sílabo con lente pedagógico</strong>
+          <p>
+            Reconoce el sílabo como herramienta de planificación,
+            no como trámite administrativo.
+          </p>
+        </article>
+
+        <article class="outcome">
+          <strong>Conectar competencia, resultado y evidencia</strong>
+          <p>
+            Identifica y justifica la alineación entre los componentes
+            del sílabo.
+          </p>
+        </article>
+
+        <article class="outcome">
+          <strong>Traducir contenidos en desempeños</strong>
+          <p>
+            Convierte lo que el estudiante “debe saber” en lo que
+            “debe poder hacer”.
+          </p>
+        </article>
+
+        <article class="outcome">
+          <strong>Alinear con diseño inverso</strong>
+          <p>
+            Planifica desde el resultado esperado y su evidencia,
+            con coherencia constructiva.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- 4 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">4</span>
+        Competencias por desarrollar
+      </h2>
+
+      <div class="competency-card">
+        <strong>C2 · Competencias Pedagógicas</strong>
+        <span>Competencia declarada para el curso en el PAC 2026.</span>
+      </div>
+
+    </section>
+
+
+    <!-- 5 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">5</span>
+        Organización del aprendizaje
+      </h2>
+
+      <article class="module-card">
+
+        <div class="module-head">
+          <div class="module-label">
+            Módulo de aprendizaje #1
+          </div>
+
+          <div class="module-value">
+            El sílabo como herramienta de planificación
+          </div>
+        </div>
+
+        <div class="module-row">
+          <div class="left">
+            Resultado de aprendizaje
+          </div>
+
+          <div class="right">
+            Analiza los componentes del sílabo y su relación con el enfoque
+            por competencias, reconociéndolo como herramienta de planificación
+            pedagógica, mediante el análisis guiado de un sílabo institucional real.
+          </div>
+        </div>
+
+        <div class="module-row">
+          <div class="left">
+            Contenidos involucrados
+          </div>
+
+          <div class="right">
+            <ul class="clean">
+              <li>Estructura y finalidad pedagógica del sílabo.</li>
+              <li>Componentes del sílabo.</li>
+              <li>Competencias, resultados de aprendizaje y evidencias.</li>
+              <li>Relación entre elementos.</li>
+              <li>Errores frecuentes de interpretación.</li>
+              <li>Buenas prácticas de lectura pedagógica.</li>
+            </ul>
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="module-card">
+
+        <div class="module-head">
+
+          <div class="module-label">
+            Módulo de aprendizaje #2
+          </div>
+
+          <div class="module-value">
+            De la competencia al desempeño observable
+          </div>
+
+        </div>
+
+        <div class="module-row">
+
+          <div class="left">
+            Resultado de aprendizaje
+          </div>
+
+          <div class="right">
+            Traduce competencias y resultados en desempeños observables y
+            construye la matriz de alineación integral de su curso,
+            aplicando diseño inverso y coevaluación con rúbrica.
+          </div>
+
+        </div>
+
+        <div class="module-row">
+
+          <div class="left">
+            Contenidos involucrados
+          </div>
+
+          <div class="right">
+            <ul class="clean">
+              <li>Interpretación de competencias y resultados.</li>
+              <li>Desempeños observables e indicadores.</li>
+              <li>Taxonomías Bloom / Marzano y verbos observables.</li>
+              <li>Alineación constructiva.</li>
+              <li>Diseño inverso como lógica de planificación.</li>
+              <li>Errores frecuentes.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- 6 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">6</span>
+        Estrategias de aprendizaje
+      </h2>
+
+      <div class="method-intro">
+        <strong>Metodología práctica:</strong>
+        Action Mapping (Cathy Moore) + aprendizaje basado en escenarios +
+        microlearning.
+      </div>
+
+      <div class="strategy-grid">
+
+        <article class="strategy">
+          <span class="number">01</span>
+          <strong>Meta clara</strong>
+          <p>
+            Partimos del desempeño que debes lograr al planificar,
+            no de la teoría o los temas.
+          </p>
+        </article>
+
+        <article class="strategy">
+          <span class="number">02</span>
+          <strong>Acción primero</strong>
+          <p>
+            El foco está en qué harás distinto al planificar,
+            no solo en qué sabrás.
+          </p>
+        </article>
+
+        <article class="strategy">
+          <span class="number">03</span>
+          <strong>Con tu propio sílabo</strong>
+          <p>
+            Practicas sobre tu curso real: relevancia inmediata y
+            experiencia docente desde un enfoque andragógico.
+          </p>
+        </article>
+
+        <article class="strategy">
+          <span class="number">04</span>
+          <strong>Solo lo esencial</strong>
+          <p>
+            Microcontenidos mínimos y necesarios para actuar,
+            sin relleno ni sobrecarga.
+          </p>
+        </article>
+
+      </div>
+
+      <div class="practice-note">
+        Tu evaluación es tu práctica: escenarios formativos con feedback
+        inmediato y entregables reales que suman a tu nota final.
+      </div>
+
+    </section>
+
+
+    <!-- 7 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">7</span>
+        Sistema de evaluación
+      </h2>
+
+      <div class="table-wrap">
+
+        <table class="eval-table">
+
+          <thead>
+            <tr>
+              <th>Evaluaciones</th>
+              <th>Cód.</th>
+              <th>Evidencia de aprendizaje</th>
+              <th>Peso</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+
+              <td class="rubric">
+                Actividad Módulo 1
+              </td>
+
+              <td class="code">
+                A1
+              </td>
+
+              <td>
+                <strong>Diagnóstico de alineación del propio sílabo.</strong>
+                Análisis de los componentes del sílabo y de la relación
+                entre competencia, resultado de aprendizaje y evidencia.
+              </td>
+
+              <td class="weight">
+                40%
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="rubric">
+                Trabajo final
+              </td>
+
+              <td class="code">
+                TF
+              </td>
+
+              <td>
+                <strong>Matriz de alineación competencia–desempeño.</strong>
+                Construcción de la matriz integral del curso:
+                competencia → resultado de aprendizaje → desempeño observable
+                → evidencia → actividad auténtica, mejorada a partir del
+                feedback de la coevaluación.
+              </td>
+
+              <td class="weight">
+                60%
+              </td>
+
+            </tr>
+
+
+            <tr class="formula-row">
+              <td colspan="4">
+                NF = 40% A1 + 60% Trabajo final
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- 8 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">8</span>
+        Actividades principales
+      </h2>
+
+      <div class="table-wrap">
+
+        <table class="route-table">
+
+          <thead>
+            <tr>
+              <th>Módulo</th>
+              <th>Tema</th>
+              <th>Contenido</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+
+              <td class="module-col">
+                1
+              </td>
+
+              <td class="topic-col">
+                <h4>
+                  TEMA 1: El sílabo como herramienta de planificación.
+                </h4>
+              </td>
+
+              <td>
+                <ul>
+                  <li>Estructura y finalidad pedagógica del sílabo.</li>
+                  <li>Componentes del sílabo.</li>
+                  <li>Competencias, resultados y evidencias.</li>
+                  <li>Relación entre elementos.</li>
+                  <li>Errores frecuentes de interpretación.</li>
+                  <li>Buenas prácticas de lectura pedagógica.</li>
+                </ul>
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="module-col">
+                2
+              </td>
+
+              <td class="topic-col">
+                <h4>
+                  TEMA 2: De la competencia al desempeño observable.
+                </h4>
+              </td>
+
+              <td>
+                <ul>
+                  <li>Interpretación de competencias y resultados.</li>
+                  <li>Desempeños observables e indicadores.</li>
+                  <li>Bloom / Marzano y verbos observables.</li>
+                  <li>Alineación constructiva.</li>
+                  <li>Diseño inverso.</li>
+                  <li>Errores frecuentes.</li>
+                </ul>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <div class="work-box">
+
+        <div class="label">
+          Trabajo final
+        </div>
+
+        <div class="work-content">
+
+          <strong>
+            Matriz de alineación integral aplicada a un sílabo real del docente.
+          </strong>
+
+          <br><br>
+
+          Competencia → resultado de aprendizaje → desempeño observable →
+          evidencia → actividad auténtica.
+
+          <br><br>
+
+          La versión final de la matriz será mejorada con el feedback de la
+          coevaluación. Se trata de una matriz de curso, no de un diseño de sesión.
+
+          <br><br>
+
+          <strong>Evidencia:</strong>
+          Matriz de alineación integral del curso.
+
+          <br>
+
+          <strong>Instrumento:</strong>
+          Rúbrica de coevaluación.
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 9 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">9</span>
+        Recursos y materiales
+      </h2>
+
+      <div class="resource-list">
+
+        <article class="resource-card">
+          <strong>Aula Virtual SISE · Canvas</strong>
+          <p>
+            Materiales y actividades online del curso.
+          </p>
+        </article>
+
+        <article class="resource-card">
+          <strong>Microsoft Teams</strong>
+          <p>
+            Acompañamiento y consultas, cuando corresponda.
+          </p>
+        </article>
+
+        <article class="resource-card">
+          <strong>Biblioteca Virtual SISE</strong>
+          <p>
+            bibliotecavirtual.sise.edu.pe
+          </p>
+        </article>
+
+        <article class="resource-card">
+          <strong>Formatos descargables · Job aids</strong>
+          <p>
+            Matriz de diagnóstico, checklist de alineación,
+            guía de verbos y rúbrica de coevaluación.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- 10 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">10</span>
+        Referencias bibliográficas
+      </h2>
+
+      <ul class="references">
+
+        <li>
+          Wiggins, G. &amp; McTighe, J. (2005).
+          <em>Understanding by Design.</em> ASCD.
+        </li>
+
+        <li>
+          Biggs, J. &amp; Tang, C. (2011).
+          <em>Teaching for Quality Learning at University.</em>
+          Open University Press.
+        </li>
+
+        <li>
+          Anderson, L. &amp; Krathwohl, D. (2001).
+          <em>A Taxonomy for Learning, Teaching and Assessing.</em>
+          Longman.
+        </li>
+
+        <li>
+          Tobón, S. (2013).
+          <em>Formación integral y competencias.</em>
+          ECOE Ediciones.
+        </li>
+
+        <li>
+          Moore, C. (2017).
+          <em>Map It: The Hands-On Guide to Strategic Training Design.</em>
+          Montesa Press.
+        </li>
+
+      </ul>
+
+      <p class="tiny-note">
+        De preferencia utilice la Biblioteca Virtual SISE:
+        bibliotecavirtual.sise.edu.pe
+      </p>
+
+    </section>
+
+
+    <!-- 11 -->
+    <section class="section">
+
+      <h2 class="section-title">
+        <span class="section-no">11</span>
+        Certificación
+      </h2>
+
+      <div class="cert-box">
+
+        <strong>
+          Evaluación y certificación
+        </strong>
+
+        <ul>
+          <li>Certificación digital por aprobación.</li>
+          <li>Nota mínima aprobatoria: 17.</li>
+          <li>Autogestión del certificado por el aula virtual.</li>
+          <li>Certificado no conducente a grado o título profesional.</li>
+        </ul>
+
+        <em>
+          Modalidad online asíncrona · Microlearning · Público: Docentes SISE.
+        </em>
+
+      </div>
+
+    </section>
+
   </div>
-</div>
+
+
+  <footer class="footer">
+    <span>
+      Plan Anual de Capacitación Docente 2026 · Instituto SISE
+    </span>
+
+    <strong>
+      #HAZLABIEN
+    </strong>
+  </footer>
+
+</main>
+
+
+<!-- =========================================================
+     BOTÓN FLOTANTE DE DESCARGA
+========================================================= -->
+
+<button
+  class="pdf-download-float"
+  id="downloadSyllabusPdf"
+  type="button"
+  aria-label="Descargar sílabo en PDF">
+
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true">
+
+    <path d="M12 3v12"></path>
+    <path d="m7 10 5 5 5-5"></path>
+    <path d="M5 21h14"></path>
+
+  </svg>
+
+  <span>Descargar sílabo en PDF</span>
+
+</button>
+
+
+<!--
+  Generación del PDF directamente desde la web.
+  Si la librería no carga, se utiliza la impresión del navegador
+  como mecanismo de respaldo.
+-->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
+</script>
 
 <script>
 (function(){
-  // reverse:true => la afirmación describe una práctica centrada en contenido (puntúa a la inversa)
-  var items = [
-    { q:"Cuando planifico, empiezo pensando en los temas que voy a cubrir.", reverse:true },
-    { q:"Reviso que el verbo de mi resultado de aprendizaje sea observable (que se pueda ver y evaluar).", reverse:false },
-    { q:"Uso verbos como \u201cconocer\u201d, \u201ccomprender\u201d o \u201csaber\u201d en mis resultados de aprendizaje.", reverse:true },
-    { q:"Antes de dise\u00f1ar una actividad, verifico qu\u00e9 evidencia demuestra el resultado.", reverse:false },
-    { q:"Me aseguro de que el verbo de la evidencia coincida con el nivel del resultado.", reverse:false },
-    { q:"Distingo con claridad entre \u201ccontenido\u201d (lo que se revisa) y \u201cdesempe\u00f1o\u201d (lo que el estudiante debe poder hacer).", reverse:false },
-    { q:"Cuando un resultado dice \u201cel estudiante conoce X\u201d, s\u00e9 c\u00f3mo convertirlo en un desempe\u00f1o observable.", reverse:false },
-    { q:"Reviso que no haya contenidos que no tributen a ninguna evidencia.", reverse:false }
-  ];
-  var LABELS = ["Siempre", "A veces", "Casi nunca"]; // índices 0,1,2
-  var answers = new Array(items.length).fill(null);
 
-  var itemsEl = document.getElementById('items');
-  var progEl = document.getElementById('progress');
-  var seeBtn = document.getElementById('see');
-  var resultEl = document.getElementById('result');
+  const button = document.getElementById("downloadSyllabusPdf");
+  const syllabus = document.getElementById("syllabus");
 
-  function render(){
-    var html = "";
-    for (var i=0;i<items.length;i++){
-      html += '<div class="stmt"><p class="q">'+(i+1)+'. '+items[i].q+'</p><div class="opts">';
-      for (var k=0;k<LABELS.length;k++){
-        html += '<button class="opt" data-i="'+i+'" data-k="'+k+'">'+LABELS[k]+'</button>';
+  if(!button || !syllabus) return;
+
+  button.addEventListener("click", async function(){
+
+    const originalHTML = button.innerHTML;
+
+    button.disabled = true;
+    button.innerHTML = "Preparando PDF…";
+
+    const options = {
+
+      margin: [5,5,5,5],
+
+      filename:
+        "Silabo_Diseno_Inverso_Planificacion_Didactica_Inteligente_A4.pdf",
+
+      image: {
+        type: "jpeg",
+        quality: 0.98
+      },
+
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#FFFFFF",
+        scrollY: 0
+      },
+
+      jsPDF: {
+        unit: "mm",
+        format: "a4",
+        orientation: "portrait"
+      },
+
+      pagebreak: {
+        mode: ["css","legacy"],
+        avoid: [
+          ".module-card",
+          ".strategy",
+          ".outcome",
+          ".resource-card",
+          ".work-box",
+          ".cert-box"
+        ]
       }
-      html += '</div></div>';
-    }
-    itemsEl.innerHTML = html;
-    var opts = itemsEl.querySelectorAll('.opt');
-    for (var j=0;j<opts.length;j++){ opts[j].addEventListener('click', pick); }
-  }
 
-  function pick(){
-    var i = parseInt(this.getAttribute('data-i'),10);
-    var k = parseInt(this.getAttribute('data-k'),10);
-    answers[i] = k;
-    var group = this.parentNode.querySelectorAll('.opt');
-    for (var g=0;g<group.length;g++){ group[g].classList.remove('sel'); }
-    this.classList.add('sel');
-    var done = answers.filter(function(a){return a!==null;}).length;
-    progEl.textContent = done + " / " + items.length + " respondidas";
-    seeBtn.disabled = done < items.length;
-  }
+    };
 
-  function score(){
-    var s = 0;
-    for (var i=0;i<items.length;i++){
-      var a = answers[i]; // 0 Siempre,1 A veces,2 Casi nunca
-      var pts = items[i].reverse ? a : (2 - a); // desempeño-orientación
-      s += pts;
-    }
-    return s; // 0..16
-  }
+    try{
 
-  var PROFILES = [
-    { min:0, max:6, key:"Enfocado en contenidos", color:"#C77700",
-      text:"Tu punto de partida: planificas desde los temas. Es lo m\u00e1s com\u00fan y un inicio v\u00e1lido, pero deja el desempe\u00f1o impl\u00edcito: el estudiante no siempre sabe qu\u00e9 debe poder hacer.",
-      work:["Convertir contenidos en desempe\u00f1os observables.","Reconocer y reemplazar verbos poco evaluables.","Que el verbo del resultado gu\u00ede la evidencia."] },
-    { min:7, max:11, key:"En transici\u00f3n", color:"#0075B0",
-      text:"Tu punto de partida: ya distingues desempe\u00f1o de contenido en varias decisiones, pero a\u00fan se cuelan verbos poco observables o evidencias algo desalineadas.",
-      work:["Afinar el verbo del resultado (Bloom\u2013Marzano).","Cerrar la cadena resultado \u2192 desempe\u00f1o \u2192 evidencia.","Depurar contenidos que no tributan a la evidencia."] },
-    { min:12, max:16, key:"Enfocado en desempe\u00f1os", color:"#1E8E5A",
-      text:"Tu punto de partida: ya lees y redactas en clave de desempe\u00f1o. Vas por delante del promedio.",
-      work:["Ganar precisi\u00f3n con la gu\u00eda de verbos Bloom\u2013Marzano.","Anticipar casos l\u00edmite entre contenido y desempe\u00f1o.","Consolidar todo en una matriz de alineaci\u00f3n integral."] }
-  ];
+      if(typeof html2pdf !== "undefined"){
 
-  function showResult(){
-    var s = score();
-    var p = PROFILES[0];
-    for (var i=0;i<PROFILES.length;i++){ if (s>=PROFILES[i].min && s<=PROFILES[i].max){ p = PROFILES[i]; break; } }
-    var pct = Math.round((s/16)*100);
-    var segs = "";
-    var filled = Math.round((s/16)*10);
-    for (var g=0; g<10; g++){ segs += '<div class="seg" style="background:'+(g<filled? p.color : "#ececed")+'"></div>'; }
-    var work = "";
-    for (var w=0; w<p.work.length; w++){
-      work += '<div class="li"><span style="flex:0 0 auto;color:'+p.color+';font-weight:900;">\u2192</span><span>'+p.work[w]+'</span></div>';
-    }
-    resultEl.innerHTML =
-      '<div class="rband" style="background:'+p.color+'">'
-      + '<div class="lab">TU PERFIL DE PARTIDA</div>'
-      + '<h3>'+p.key+'</h3>'
-      + '<div class="scale">'+segs+'</div>'
-      + '<div style="font-size:14px; opacity:.92;">Orientaci\u00f3n al desempe\u00f1o: '+pct+'%</div>'
-      + '</div>'
-      + '<p class="rtext">'+p.text+'</p>'
-      + '<div class="work"><h4>En esta sesi\u00f3n trabajar\u00e1s:</h4>'+work+'</div>'
-      + '<div class="bridge">Este perfil es solo tu punto de partida, no una etiqueta. A lo largo de la Sesi\u00f3n 2 lo pondr\u00e1s a prueba y, al final, construir\u00e1s tu matriz de alineaci\u00f3n integral.</div>';
-    itemsEl.style.display = "none";
-    document.querySelector('.intro').style.display = "none";
-    resultEl.classList.add('show');
-    seeBtn.style.display = "none";
-    progEl.textContent = "Perfil generado";
-    var bar = document.querySelector('.bar');
-    var group = document.createElement('div');
-    group.className = "barbtns";
-    var dl = document.createElement('button');
-    dl.className = "btn dl";
-    dl.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg> Descargar resultados';
-    dl.addEventListener('click', function(){ downloadResults(p, s, pct); });
-    var restart = document.createElement('button');
-    restart.className = "btn ghost"; restart.id = "restart"; restart.textContent = "Rehacer";
-    restart.addEventListener('click', function(){ location.reload(); });
-    group.appendChild(dl); group.appendChild(restart);
-    bar.appendChild(group);
-    window.scrollTo({top:0, behavior:'smooth'});
-  }
+        await html2pdf()
+          .set(options)
+          .from(syllabus)
+          .save();
 
-  function downloadResults(p, s, pct){
-    var date = new Date().toLocaleDateString('es-PE', { year:'numeric', month:'long', day:'numeric' });
-    var color = p.color.replace('#','');
-    function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    function run(text, o){ o=o||{};
-      var rpr='<w:rPr>'+(o.b?'<w:b/>':'')+(o.color?'<w:color w:val="'+o.color+'"/>':'')+(o.sz?'<w:sz w:val="'+o.sz+'"/><w:szCs w:val="'+o.sz+'"/>':'')+(o.spacing?'<w:spacing w:val="'+o.spacing+'"/>':'')+'<w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/></w:rPr>';
-      return '<w:r>'+rpr+'<w:t xml:space="preserve">'+esc(text)+'</w:t></w:r>';
-    }
-    function para(inner, o){ o=o||{};
-      var spacing='<w:spacing '+(o.before?'w:before="'+o.before+'" ':'')+(o.after!=null?'w:after="'+o.after+'" ':'w:after="0" ')+'w:line="288" w:lineRule="auto"/>';
-      var bdr='';
-      if(o.borderBottom){ bdr='<w:pBdr><w:bottom w:val="single" w:sz="'+(o.borderSz||6)+'" w:space="'+(o.borderSpace||4)+'" w:color="'+o.borderColor+'"/></w:pBdr>'; }
-      if(o.borderTop){ bdr='<w:pBdr><w:top w:val="single" w:sz="'+(o.borderSz||6)+'" w:space="'+(o.borderSpace||6)+'" w:color="'+o.borderColor+'"/></w:pBdr>'; }
-      var ind=o.indent? '<w:ind w:left="'+o.indent+'" w:hanging="'+(o.hanging||0)+'"/>':'';
-      var tabs=o.rtab? '<w:tabs><w:tab w:val="right" w:pos="'+o.rtab+'"/></w:tabs>':'';
-      return '<w:p><w:pPr>'+spacing+bdr+ind+tabs+'</w:pPr>'+inner+'</w:p>';
+      }else{
+
+        window.print();
+
+      }
+
+    }catch(error){
+
+      console.error("No fue posible generar el PDF:",error);
+      window.print();
+
+    }finally{
+
+      button.disabled = false;
+      button.innerHTML = originalHTML;
+
     }
 
-    var body='';
-    body += para(run('SISE ',{b:true,color:'FF0E49',sz:26})+run('\u00bb  ',{b:true,color:'231F20',sz:26})+run('AUTODIAGN\u00d3STICO \u00b7 DEL S\u00cdLABO AL DESEMPE\u00d1O',{color:'9A9AA0',sz:15,spacing:24}), {after:80});
-    body += para('', {borderBottom:true, borderColor:'FF0E49', borderSz:6, after:300});
-    body += para(run('MI PERFIL DE PARTIDA',{b:true,color:'9A9AA0',sz:16,spacing:40}), {after:40});
-    body += para(run(p.key,{b:true,color:color,sz:52}), {after:80});
-    body += para(run('Orientaci\u00f3n al desempe\u00f1o \u00b7 '+pct+'%',{color:'6C6C74',sz:18}), {after:240});
-    body += para(run(p.text,{color:'231F20',sz:22}), {after:260});
-    body += para(run('EN ESTA SESI\u00d3N TRABAJAR\u00c1S',{b:true,color:'231F20',sz:17,spacing:24}), {after:120});
-    for(var i=0;i<p.work.length;i++){
-      body += para(run('\u2022   ',{b:true,color:color,sz:22})+run(p.work[i],{sz:22}), {after:90, indent:280, hanging:280});
-    }
-    body += para(run(date,{color:'9A9AA0',sz:16})+'<w:r><w:tab/></w:r>'+run('#HAZLABIEN',{b:true,color:'FF0E49',sz:16}), {before:440, borderTop:true, borderColor:'EEEEEE', borderSz:4, rtab:9350});
+  });
 
-    var documentXml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-      +'<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'
-      +body
-      +'<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
-      +'</w:body></w:document>';
-    var contentTypes='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-      +'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
-      +'<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
-      +'<Default Extension="xml" ContentType="application/xml"/>'
-      +'<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'
-      +'</Types>';
-    var rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-      +'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-      +'<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>'
-      +'</Relationships>';
-
-    function u8(str){ return new TextEncoder().encode(str); }
-    var files=[
-      {name:'[Content_Types].xml', data:u8(contentTypes)},
-      {name:'_rels/.rels', data:u8(rels)},
-      {name:'word/document.xml', data:u8(documentXml)}
-    ];
-    function crc32(bytes){
-      var table=crc32._t; if(!table){ table=crc32._t=[]; for(var n=0;n<256;n++){ var c=n; for(var k=0;k<8;k++){ c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);} table[n]=c>>>0; } }
-      var crc=0xFFFFFFFF; for(var i=0;i<bytes.length;i++){ crc=(crc>>>8)^table[(crc^bytes[i])&0xFF]; } return (crc^0xFFFFFFFF)>>>0;
-    }
-    function u16(n){ return [n&0xFF,(n>>>8)&0xFF]; }
-    function u32(n){ return [n&0xFF,(n>>>8)&0xFF,(n>>>16)&0xFF,(n>>>24)&0xFF]; }
-    var parts=[], central=[], offset=0;
-    for(var f=0; f<files.length; f++){
-      var nameU8=u8(files[f].name), data=files[f].data, crc=crc32(data), len=data.length;
-      var local=[].concat(u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(len),u32(len),u16(nameU8.length),u16(0));
-      parts.push(new Uint8Array(local), nameU8, data);
-      var cen=[].concat(u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(len),u32(len),u16(nameU8.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset));
-      central.push(new Uint8Array(cen), nameU8);
-      offset += local.length + nameU8.length + len;
-    }
-    var cdStart=offset, cdSize=0;
-    for(var c=0;c<central.length;c++){ cdSize+=central[c].length; }
-    var end=new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(cdSize),u32(cdStart),u16(0)));
-    var all=parts.concat(central).concat([end]);
-    var total=0; for(var t=0;t<all.length;t++){ total+=all[t].length; }
-    var out=new Uint8Array(total), pos=0;
-    for(var m=0;m<all.length;m++){ out.set(all[m],pos); pos+=all[m].length; }
-
-    var blob=new Blob([out], {type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
-    var url=URL.createObjectURL(blob);
-    var a=document.createElement('a'); a.href=url; a.download='Mi_perfil_de_partida.docx';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 1200);
-  }
-
-  seeBtn.addEventListener('click', showResult);
-  render();
 })();
 </script>
+
 </body>
 </html>
